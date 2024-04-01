@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文字数カウンター</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        max-width: 500px;
+        width: 100%;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    .cautionary-note {
+        text-align: center;
+        color: #e25454;
+    }
+    textarea {
+        width: 100%;
+        height: 150px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        resize: none;
+    }
+    .count-result {
+        text-align: right;
+        color: #666;
+        font-size: 14px;
+    }
+    #characterCount {
+        color: #333;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>文字数カウンター</h1>
+        <p class="cautionary-note">※入力されたテキストはサーバーへ送信されません。</p>
+        <textarea id="textArea" placeholder="ここにテキストを入力してください"></textarea>
+        <label for="countSpaces">空白もカウントする:</label>
+        <input type="checkbox" id="countSpaces" checked>
+        <label for="countNewlines">改行もカウントする:</label>
+        <input type="checkbox" id="countNewlines" checked>
+        <p class="count-result">文字数: <span id="characterCount">0</span></p>
+    </div>
+
+    <script>
+        // テキストエリアの要素を取得
+        const textArea = document.getElementById('textArea');
+        // 文字数を表示する要素を取得
+        const characterCount = document.getElementById('characterCount');
+        // 空白もカウントするチェックボックスを取得
+        const countSpacesCheckbox = document.getElementById('countSpaces');
+        // 改行もカウントするチェックボックスを取得
+        const countNewlinesCheckbox = document.getElementById('countNewlines');
+
+        // テキストエリアの入力が変更された時の処理
+        textArea.addEventListener('input', function() {
+            // 入力されたテキストを取得
+            const text = textArea.value;
+            // カウントするかどうかを確認
+            const countSpaces = countSpacesCheckbox.checked;
+            const countNewlines = countNewlinesCheckbox.checked;
+            // 文字数をカウント
+            let count = text.length;
+            if (!countSpaces) {
+                count -= text.split(' ').length - 1;
+            }
+            if (!countNewlines) {
+                count -= text.split('\n').length - 1;
+            }
+            // 文字数を表示する要素に表示
+            characterCount.textContent = count;
+        });
+
+        // 空白もカウントするチェックボックスの変更時の処理
+        countSpacesCheckbox.addEventListener('change', function() {
+            // テキストエリアの入力が変更された時の処理を再実行
+            textArea.dispatchEvent(new Event('input'));
+        });
+
+        // 改行もカウントするチェックボックスの変更時の処理
+        countNewlinesCheckbox.addEventListener('change', function() {
+            // テキストエリアの入力が変更された時の処理を再実行
+            textArea.dispatchEvent(new Event('input'));
+        });
+    </script>
+</body>
+</html>
