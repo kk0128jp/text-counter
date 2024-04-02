@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,8 +46,17 @@
         font-size: 14px;
     }
     #characterCount {
-        color: #333;
+        display: inline-block;
+        color: #fff;
         font-weight: bold;
+        font-size: 24px;
+        width: 40px; /* 数字を中心にするための幅 */
+        height: 40px; /* 数字を中心にするための高さ */
+        line-height: 40px; /* 数字を中心に配置 */
+        border-radius: 50%; /* 円形の形状 */
+        background-color: #333; /* 背景色 */
+        margin-left: 5px; /* 数字との間隔 */
+        text-align: center;
     }
 </style>
 </head>
@@ -61,7 +70,7 @@
         <label for="countNewlines">改行もカウントする:</label>
         <input type="checkbox" id="countNewlines" checked>
         <p class="count-result">文字数: <span id="characterCount">0</span></p>
-        <a href="https://github.com/kk0128jp/text-counter">ソースコード</a>
+        <a class="github-icon" href="https://github.com/kk0128jp/text-counter">ソースコードはこちら</a>
     </div>
 
     <script>
